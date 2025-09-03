@@ -4,6 +4,16 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from . import models, database, schemas, crud
 
+from fastapi import FastAPI
+from . import models, database
+
+app = FastAPI()
+
+@app.get("/api/health")
+def health():
+    return {"status": "ok"}
+
+
 # Create DB tables
 models.Base.metadata.create_all(bind=database.engine)
 
